@@ -4116,7 +4116,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       _classCallCheck(this, ConnectionService);
 
       //localhost development
-      //public domain: String = "http://localhost:3000";
+      // public domain: String = "http://localhost:3000";
       // if deployed online
       this.domain = "";
     };

@@ -2454,7 +2454,7 @@ __webpack_require__.r(__webpack_exports__);
 class ConnectionService {
     constructor() {
         //localhost development
-        //public domain: String = "http://localhost:3000";
+        // public domain: String = "http://localhost:3000";
         // if deployed online
         this.domain = "";
     }
