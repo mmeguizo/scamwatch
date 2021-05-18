@@ -28,6 +28,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 mongoose.connect(config.uri, config.options, (err) => {
+
     if (err) {
         console.log('cant connect to database ' + process.env.DB_NAME);
     } else {
@@ -94,6 +95,10 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
     console.log('Connected on port ' + PORT);
+    console.log(process.env.DB_NAME);
+    console.log(process.env.DB_PORT);
+    console.log(process.env.DB_HOST);
+    console.log(process.env.SECRET);
 });
 
 
