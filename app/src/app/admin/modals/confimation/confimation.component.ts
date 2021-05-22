@@ -2,6 +2,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../services/auth.service';
+import { InfoService } from '../../../services/infor.service';
+import { InformationsService } from '../../../services/information.service';
 import { RoomsService } from '../../../services/rooms.service';
 import { UserService } from '../../../services/users.service';
 
@@ -27,6 +29,7 @@ export class ConfimationComponent implements OnInit {
   public message1 = '';
   public data;
   public room;
+  public information;
 
 
   constructor(
@@ -34,7 +37,8 @@ export class ConfimationComponent implements OnInit {
     public activeModal: NgbActiveModal,
     public auth: AuthService,
     public user_service: UserService,
-    public room_service: RoomsService
+    public room_service: RoomsService,
+    public information_service: InfoService,
 
 
   ) {
@@ -44,7 +48,7 @@ export class ConfimationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.room);
+    console.log(this.information);
 
 
     //USER
@@ -75,6 +79,24 @@ export class ConfimationComponent implements OnInit {
         this.message1 = 'Activating';
       } else if (this.room.delete) {
         console.log(this.room.delete);
+        this.message = 'Delete';
+        this.message1 = 'Deleting';
+      }
+
+    }
+
+    //INFORMATION
+    if (this.information) {
+      //ROOM
+      this.name = this.information.information;
+      if (this.information.status === 'active' && !this.information.delete) {
+        this.message = 'Deactivation';
+        this.message1 = 'Deactivating';
+      } else if (this.information.status === 'inactive' && !this.information.delete) {
+        this.message = 'Activation';
+        this.message1 = 'Activating';
+      } else if (this.information.delete) {
+        console.log(this.information.delete);
         this.message = 'Delete';
         this.message1 = 'Deleting';
       }
@@ -142,6 +164,32 @@ export class ConfimationComponent implements OnInit {
 
       } else {
         this.room_service.changeRoomStatus(this.room).subscribe((data: any) => {
+          if (data.success) {
+            this.auth.Notifytoast('success', data.message, 'Success', 3000, 'bottom-right')
+            this.passEntry.emit(data.data)
+            this.closeModal();
+          } else {
+            this.auth.Notifytoast('danger', data.message, 'Error', 3000, 'bottom-right')
+          }
+        });
+      }
+    }
+    if (this.information) {
+
+      //ROOM
+      if (this.information.delete) {
+        this.information_service.deleteInformation(this.information).subscribe((data: any) => {
+          if (data.success) {
+            this.auth.Notifytoast('success', data.message, 'Success', 3000, 'bottom-right')
+            this.passEntry.emit(data.data)
+            this.closeModal();
+          } else {
+            this.auth.Notifytoast('danger', data.message, 'Error', 3000, 'bottom-right')
+          }
+        });
+
+      } else {
+        this.information_service.changeInformationStatus(this.information).subscribe((data: any) => {
           if (data.success) {
             this.auth.Notifytoast('success', data.message, 'Success', 3000, 'bottom-right')
             this.passEntry.emit(data.data)

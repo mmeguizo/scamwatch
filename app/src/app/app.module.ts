@@ -39,11 +39,13 @@ import { RoomsService } from './services/rooms.service';
 import { CategoryService } from './services/categories.service';
 import { InventoryService } from './services/inventory.service';
 import { SearchService } from './services/search.service';
+import { InformationsService } from './services/information.service';
+import { InfoService } from './services/infor.service';
+import { UploadFilesService } from './services/upload-file.service';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
-
 
 
 @NgModule({
@@ -101,6 +103,9 @@ export function tokenGetter() {
     ConnectionService,
     InventoryService,
     SearchService,
+    InformationsService,
+    InfoService,
+    UploadFilesService
 
   ],
 })

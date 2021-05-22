@@ -137,7 +137,7 @@ const userSchema = new Schema({
   status: { type: String, default: 'active' },
   deleted: { type: Boolean, default: false },
   password: { type: String, required: true, validate: passwordValidator },
-  id: { type: String, default: () => nanoid() },
+  id: { type: Number, required: true, },
 });
 
 

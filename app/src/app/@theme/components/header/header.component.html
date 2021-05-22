@@ -13,10 +13,11 @@
 
 <div class="header-container">
   <nb-actions size="small">
-    <nb-action class="user-action" *nbIsGranted="['view', 'user']" matRipple>
-      <nb-user [nbContextMenu]="userMenu" nbSpinnerStatus="success" [name]="auth?.getTokenUsername()"
+    <nb-action class="user-action" [nbContextMenu]="userMenu" *nbIsGranted="['view', 'user']" matRipple>
+      <!-- <nb-user [nbContextMenu]="userMenu" nbSpinnerStatus="success" [name]="auth?.getTokenUsername()"
         [onlyPicture]="userPictureOnly" [picture]="this.auth.domain + '/images/' + (auth?.avatar || 'user1.jpg')">
-      </nb-user>
+      </nb-user> -->
+      <span class="i-circle"> {{ myName[0]  | titlecase}}</span>{{restName}}
     </nb-action>
   </nb-actions>
 </div>

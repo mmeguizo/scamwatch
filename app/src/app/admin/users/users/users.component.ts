@@ -8,7 +8,7 @@ import { UserService } from '../../../services/users.service';
 import { AddUserComponent } from '../../modals/add-user/add-user.component';
 import { ConfimationComponent } from '../../modals/confimation/confimation.component';
 import { UpdateUserComponent } from '../../modals/update-user/update-user.component';
-
+import { log } from 'console';
 
 
 @Component({
@@ -25,9 +25,11 @@ export class UsersComponent implements OnInit {
   public sortOrder = 'asc';
   public selectQueryString = 'Username';
   public selectQuery = 'username';
-  loading = true;
+  loading = false;
   public data = [];
+  public tester = [];
   public socketInstance;
+  public ids = null;
 
 
 
@@ -43,18 +45,15 @@ export class UsersComponent implements OnInit {
 
   ) {
 
-
-    this.getAllUsers();
-
-    // this.socketInstance = this.auth.listen('get_user').subscribe(emmet => {
-    //   console.log('get_user');
-    //   console.log(emmet);
-    //   this.getAllUsers();
-    // });
-
   }
 
   ngOnInit(): void {
+
+
+    this.ids =  parseInt(this.auth.getTokenUserID()) ;
+    this.getAllUsers();
+    console.log(this.ids)
+
   }
 
 
@@ -70,12 +69,15 @@ export class UsersComponent implements OnInit {
 
 
   getAllUsers() {
+
     // Function to GET all blogs from database
     this.user_service.getAllUser().subscribe((data: any) => {
 
       if (data.success) {
-        this.data = data.user
+        this.data = data.user;
         this.loading = false;
+        console.log(this.data);
+
       } else {
         this.data = [];
         this.loading = false;
@@ -84,6 +86,7 @@ export class UsersComponent implements OnInit {
 
 
   }
+
 
 
   updateUser(user) {
@@ -125,6 +128,31 @@ export class UsersComponent implements OnInit {
     });
 
   }
+
+  ownAccount(user){
+
+    if(this.ids === user.id){
+      this.auth.Notifytoast('danger', 'Cant do that ', 'Own Account', 3000, 'bottom-right')
+    }else{
+
+      this.changeStatus(user)
+
+    }
+
+  }
+
+  ownAccountDelete(user){
+
+    if(this.ids === user.id){
+      this.auth.Notifytoast('danger', 'Cant do that ', 'Own Account', 3000, 'bottom-right')
+    }else{
+      this.deleteUser(user)
+    }
+
+  }
+
+
+
   deleteUser(user) {
 
     user.delete = true;

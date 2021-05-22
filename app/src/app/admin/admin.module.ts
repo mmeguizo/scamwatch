@@ -77,6 +77,12 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { AddInventoryComponent } from './modals/add-inventory/add-inventory.component';
 import { AddCategoryComponent } from './modals/add-category/add-category.component';
 import { EditCategoryComponent } from './modals/edit-category/edit-category.component';
+import { InformationComponent } from './information/information.component';
+import { AddInformationComponent } from './modals/add-information/add-information.component';
+import { UpdateInformationComponent } from './modals/update-information/update-information.component';
+import { AdminConfirmationComponent } from './modals/admin-confirmation/admin-confirmation.component';
+
+
 
 @NgModule({
   imports: [
@@ -110,6 +116,10 @@ import { EditCategoryComponent } from './modals/edit-category/edit-category.comp
     AddInventoryComponent,
     AddCategoryComponent,
     EditCategoryComponent,
+    InformationComponent,
+    AddInformationComponent,
+    UpdateInformationComponent,
+    AdminConfirmationComponent,
 
 
 
@@ -118,6 +128,7 @@ import { EditCategoryComponent } from './modals/edit-category/edit-category.comp
   entryComponents: [
     LogoutComponent,
     AddUserComponent,
+    AddInformationComponent,
     AddRoomComponent,
     UpdateUserComponent,
     UpdateRoomComponent,
@@ -125,6 +136,7 @@ import { EditCategoryComponent } from './modals/edit-category/edit-category.comp
     AddInventoryComponent,
     AddCategoryComponent,
     EditCategoryComponent,
+    UpdateInformationComponent,
   ],
   providers: [UserService],
   exports: [RouterModule]

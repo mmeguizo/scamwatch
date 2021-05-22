@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { InfoService } from '../../services/infor.service';
+import { InformationsService } from '../../services/information.service';
 import { RoomsService } from '../../services/rooms.service';
 import { UserService } from '../../services/users.service';
+
+
 
 @Component({
   selector: 'ngx-dashboard',
@@ -24,13 +28,14 @@ export class DashboardComponent implements OnInit {
   loans = 0;
   PmAm = 0;
   public userLength = [];
-  public roomLength = [];
+  public informationLength = [];
   loading = true;
 
 
   constructor(
     public user_service: UserService,
     public room_service: RoomsService,
+    public information_service: InfoService,
     public router: Router,
 
   ) {
@@ -64,7 +69,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllUsers();
-    this.getAllRoom();
+    this.getAllInformation();
   }
 
 
@@ -85,14 +90,14 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  getAllRoom() {
+  getAllInformation() {
     // Function to GET all blogs from database
-    this.room_service.getAllRoom().subscribe((data: any) => {
+    this.information_service.getAllInformation().subscribe((data: any) => {
       if (data.success) {
-        this.roomLength = data.room
+        this.informationLength = data.information
         this.loading = false;
       } else {
-        this.roomLength = [];
+        this.informationLength = [];
         this.loading = false;
       }
     });
@@ -106,8 +111,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/admin/users']);
   }
 
-  room() {
-    this.router.navigate(['/admin/rooms']);
+  information() {
+    this.router.navigate(['/admin/information']);
   }
 
 

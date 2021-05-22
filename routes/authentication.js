@@ -118,6 +118,9 @@ module.exports = (router) => {
 
         User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
 
+          console.log(user);
+
+
           if (err) {
             res.json({ success: false, message: err.message })
 
@@ -131,7 +134,7 @@ module.exports = (router) => {
                 res.json({ success: false, message: 'Password is incorrect' })
               } else {
                 const token = jwt.sign({ userID: user._id }, config.secret, { expiresIn: '24h' });
-                res.json({ success: true, message: 'Password is Correct', token: token, user: { username: user.username }, userToken: user.username, role: user.role },)
+                res.json({ success: true, message: 'Password is Correct', token: token, user: { username: user.username }, id : user.id,userToken: user.username, role: user.role },)
 
               }
             }

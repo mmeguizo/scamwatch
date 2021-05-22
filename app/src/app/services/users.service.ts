@@ -38,6 +38,10 @@ export class UserService {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/users/getAllUser', { headers: this.options });
   }
+  getAuthUser(data) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + '/users/getAuthUser', data, { headers: this.options,  });
+  }
 
 
   addUser(data) {

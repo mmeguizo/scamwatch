@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
   template: `
     <span class="created-by">
-      Created by: <b>Mark Oliver Meguizo</b> &#169; 2021
+      Created by: <b>DevTrio</b> &#169; 2021
     </span>
 
     <span class="fright">

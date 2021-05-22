@@ -17,6 +17,11 @@ const rooms = require('./routes/rooms')(router);
 const blogs = require('./routes/blogs')(router);
 const categorys = require('./routes/categories')(router);
 const inventory = require('./routes/inventory')(router);
+const informations = require('./routes/information')(router);
+const infos = require('./routes/info')(router);
+
+
+
 const MongoClient = require('mongodb').MongoClient;
 
 const PORT = process.env.PORT || 3000;
@@ -85,6 +90,13 @@ app.use('/rooms', rooms);
 app.use('/blogs', blogs);
 app.use('/categories', categorys);
 app.use('/inventory', inventory);
+app.use('/information', informations);
+app.use('/info', infos);
+
+
+// const initRoutes = require("./src/routes");
+// initRoutes(app);
+
 
 
 app.get('*', (req, res) => {

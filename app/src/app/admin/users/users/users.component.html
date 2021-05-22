@@ -42,9 +42,17 @@
                 <tr *ngFor="let user of mf.data; let i = index">
                   <td scope="col">{{ i + 1 }}</td>
                   <td scope="col">{{ user.username | titlecase }}</td>
-                  <td scope="col">{{ user.role | titlecase}}</td>
+
+
+
+                  <td scope="col"  nbTooltip=" 🤵 Admin"  *ngIf="user.role === 'admin' ">  🤵 </td>
+                  <td scope="col"  nbTooltip="  👮 Investigator" *ngIf="user.role === 'investigator' ">  👮 </td>
+                  <td scope="col" nbTooltip="  🙎‍♂️ User" *ngIf="user.role === 'user' ">  🙎‍♂️ </td>
+
+
+
                   <td scope="col">
-                    <span class="pointer" (click)="changeStatus(user)"
+                    <span class="pointer" (click)="ownAccount(user)"
                       [ngClass]="{'active': user.status == 'active',  'inactive': user.status == 'inactive' }">{{ user.status | titlecase}}</span>
                   </td>
 
@@ -60,7 +68,7 @@
                           <nb-icon icon="edit-2" style="color: blue"></nb-icon> Update User
                         </li>
                         <li style="color:black" role="menuitem" class="dropdown-item pointer"
-                          (click)="deleteUser(user)">
+                          (click)="ownAccountDelete(user)">
                           <nb-icon icon="trash-2-outline" style="color: red"></nb-icon> Delete User
                         </li>
                       </ul>

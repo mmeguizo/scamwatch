@@ -20,7 +20,9 @@ export class UpdateUserComponent implements OnInit {
   showpassword = false;
   eyeIcon = "fas fa-eye";
   userData
+  authData;
 
+  ids : any;
   constructor(
     public activeModal: NgbActiveModal,
     public formBuilder: FormBuilder,
@@ -35,18 +37,27 @@ export class UpdateUserComponent implements OnInit {
 
   ngOnInit() {
 
+    if(this.authData){
+      this.userData = this.authData
+    }
+
     this.createForm();
   }
 
 
   createForm() {
+
     this.form = this.formBuilder.group({
-      role: [this.userData.role, [Validators.required]],
-      username: [this.userData.username, [Validators.required]],
-      email: [this.userData.email, [Validators.required]],
+      role: [this.userData.role , [Validators.required]],
+      username: [this.userData.username , [Validators.required]],
+      email: [this.userData.email , [Validators.required]],
       password: [''],
       confirm: [''],
     })
+
+
+
+
   }
 
 
@@ -60,7 +71,7 @@ export class UpdateUserComponent implements OnInit {
       this.user.updateUser(data.value).subscribe((data: any) => {
 
         if (data.success) {
-          this.auth.Notifytoast('success', data.message, 'Success', 3000, 'bottom-right')
+          this.auth.Notifytoast('warning', data.message, 'Success', 2000, 'bottom-right')
           this.passEntry.emit(data.data)
           this.closeModal();
           //this.auth.logout()

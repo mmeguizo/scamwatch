@@ -5,6 +5,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users/users.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { InformationComponent } from './information/information.component';
+
+
 
 const routes: Routes = [
   {
@@ -24,13 +27,17 @@ const routes: Routes = [
         path: 'users',
         component: UsersComponent,
       },
+      // {
+      //   path: 'rooms',
+      //   component: RoomsComponent,
+      // },
+      // {
+      //   path: 'inventory',
+      //   component: InventoryComponent,
+      // },
       {
-        path: 'rooms',
-        component: RoomsComponent,
-      },
-      {
-        path: 'inventory',
-        component: InventoryComponent,
+        path: 'information',
+        component: InformationComponent,
       },
 
     ],

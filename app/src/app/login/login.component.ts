@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
         this.toastr.pop('success', 'Success', data.message);
 
         // Function to store user's token in client local storage
-        this.authService.storeUserData(data.token, data.user, data.userToken);
+        this.authService.storeUserData(data.token, data.user, data.userToken, data.id);
 
 
         if (this.authService.CurrentlyloggedIn()) {
@@ -153,4 +153,12 @@ export class LoginComponent implements OnInit {
       },
     });
   }
+
+
+  backToSearch(){
+
+    this.router.navigate(['app/viewscammer'])
+
+  }
+
 }

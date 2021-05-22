@@ -12,8 +12,8 @@
             <mat-label>User Role:</mat-label>
             <mat-select formControlName="role" #maritalStatus id="role">
               <mat-option value="admin">Admin</mat-option>
-              <mat-option value="user">User</mat-option>
-              <mat-option value="general">General User</mat-option>
+              <mat-option value="investigator">Investigator</mat-option>
+              <mat-option value="user"> User</mat-option>
             </mat-select>
             <mat-error *ngIf="form?.get('role').touched && form.controls['role'].errors?.required">Role is
               <strong>required </strong> </mat-error>

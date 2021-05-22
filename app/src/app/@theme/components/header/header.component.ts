@@ -14,6 +14,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from '../../../guard/auth.guard';
 import { AuthService } from '../../../services/auth.service';
 import { LogoutComponent } from '../../../admin/modals/logout/logout.component';
+import { UpdateUserComponent } from '../../../admin/modals/update-user/update-user.component';
+import { UserService } from '../../../services/users.service';
 
 
 
@@ -32,6 +34,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public socketInstance: any;
 
   public contentInit = false;
+  myName : any;
+  restName : any;
+  ids: string;
 
   public constructor(
     private menuService: NbMenuService,
@@ -43,6 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public rd: ReverseDate,
     private breakpointService: NbMediaBreakpointsService,
     public router: Router,
+    public user_service: UserService,
     public ngbModal: NgbModal
   ) {
     // this.socketInstance = sgs.ResponseSocket('users').subscribe((emitted) => {
@@ -62,6 +68,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
     this.getAuthUser();
+    this.ids = this.auth.getTokenUserID()
+    this.myName = this.auth.getTokenUsername()
+    this.restName = this.auth.getTokenUsername().substring(1)
+
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService
       .onMediaQueryChange()
@@ -120,7 +130,46 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   updateUser() {
-    // const activeModal = this.ngbModal.open(UpdateProfileComponent, { size: 'lg', container: 'nb-layout', windowClass: 'min_height' });
+    // const activeModal = this.ngbModal.open(UpdateUserComponent, { size: 'lg', container: 'nb-layout', windowClass: 'min_height' });
     // activeModal.componentInstance.uid = this.authUser.id;
+
+
+    this.user_service.getAuthUser( { id : parseInt(this.ids) } ).subscribe((data: any) => {
+
+      console.log(data);
+
+      if (data.success) {
+    const activeModal = this.ngbModal.open(UpdateUserComponent, { size: 'lg', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
+    activeModal.componentInstance.authData = data.data[0];
+    activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
+      this.auth.Notifytoast('success', 'Account Change', 'Logging out in 3 Sec', 1000, 'bottom-right');
+
+      setTimeout(() =>{
+        this.auth.Notifytoast('success', 'Account Change', 'Logging out in 2 Sec', 1000, 'bottom-right');
+       },2000
+      )
+      setTimeout(() =>{
+        this.auth.Notifytoast('success', 'Account Change', 'Logging out in 1 Sec', 1000, 'bottom-right');
+       },3000
+      )
+
+
+      setTimeout(() =>{
+        this.auth.logout()
+       },3500
+      )
+
+    });
+
+      } else {
+        this.auth.Notifytoast('danger', 'Cant update User', 'Error', 3000, 'bottom-right')
+
+      }
+    });
+
+
+
+
+
   }
 }
