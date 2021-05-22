@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../services/users.service';
 import { AuthService } from '../../../services/auth.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { UploadFilesService } from '../../../services/upload-file.service';
+// import { UploadFilesService } from '../../../services/upload-file.service';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class AddUserComponent implements OnInit {
     public formBuilder: FormBuilder,
     public user: UserService,
     public auth: AuthService,
-    public uploadService: UploadFilesService,
+    // public uploadService: UploadFilesService,
 
   ) {
     this.createForm();
@@ -49,7 +49,7 @@ export class AddUserComponent implements OnInit {
       confirm: ['', [Validators.required]],
     })
 
-    this.getFiles()
+    // this.getFiles()
 
 
   }
@@ -106,62 +106,62 @@ export class AddUserComponent implements OnInit {
   }
 
 
-  upload(): void {
-    this.progress = 0;
+  // upload(): void {
+  //   this.progress = 0;
 
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
+  //   if (this.selectedFiles) {
+  //     const file: File | null = this.selectedFiles.item(0);
 
-      if (file) {
-        this.currentFile = file;
+  //     if (file) {
+  //       this.currentFile = file;
 
-        this.uploadService.upload(this.currentFile).subscribe(
-          (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.progress = Math.round(100 * event.loaded / event.total);
-            } else if (event instanceof HttpResponse) {
-              this.message = event.body.message;
-              this.fileInfos = this.uploadService.getFiles();
-            }
-          },
-          (err: any) => {
-            console.log(err);
-            this.progress = 0;
+  //       this.uploadService.upload(this.currentFile).subscribe(
+  //         (event: any) => {
+  //           if (event.type === HttpEventType.UploadProgress) {
+  //             this.progress = Math.round(100 * event.loaded / event.total);
+  //           } else if (event instanceof HttpResponse) {
+  //             this.message = event.body.message;
+  //             this.fileInfos = this.uploadService.getFiles();
+  //           }
+  //         },
+  //         (err: any) => {
+  //           console.log(err);
+  //           this.progress = 0;
 
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-            } else {
-              this.message = 'Could not upload the file!';
-            }
+  //           if (err.error && err.error.message) {
+  //             this.message = err.error.message;
+  //           } else {
+  //             this.message = 'Could not upload the file!';
+  //           }
 
-            this.currentFile = undefined;
-          });
+  //           this.currentFile = undefined;
+  //         });
 
-      }
+  //     }
 
-      this.selectedFiles = undefined;
-    }
-  }
+  //     this.selectedFiles = undefined;
+  //   }
+  // }
 
-  getFiles() {
+  // getFiles() {
 
-    // this.fileInfos = this.uploadService.getFiles().subscribe((data: any) => {
-    //   console.log('uploadService');
-    //   console.log(data);
-    // });
-    this.fileInfos = this.uploadService.getFiles().subscribe( (data: any) => {
+  //   // this.fileInfos = this.uploadService.getFiles().subscribe((data: any) => {
+  //   //   console.log('uploadService');
+  //   //   console.log(data);
+  //   // });
+  //   this.fileInfos = this.uploadService.getFiles().subscribe( (data: any) => {
 
-          console.log(data);
+  //         console.log(data);
 
-    })
-  }
+  //   })
+  // }
 
-  source(data) {
+  // source(data) {
 
-    // return `connection.domain + '/student_file/' + image.file.link`
-    return `${this.auth.domain}/student_file/${data}`
+  //   // return `connection.domain + '/student_file/' + image.file.link`
+  //   return `${this.auth.domain}/student_file/${data}`
 
-  }
+  // }
 
 
 
