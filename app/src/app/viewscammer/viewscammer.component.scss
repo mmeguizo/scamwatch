@@ -30,7 +30,7 @@
       .search {
         position: absolute;
         margin: auto;
-        top: 0;
+        top:180px;
         right: 0;
         bottom: 0;
         left: 0;
@@ -78,7 +78,7 @@
         font-family: 'Inconsolata', monospace;
         position: absolute;
         margin: auto;
-        top: 0;
+        top:180px;
         right: 0;
         bottom: 0;
         left: 0;
@@ -135,9 +135,7 @@
         }
       }
     }
-    .example-card {
-        max-width: 400px;
-      }
+   
       
       .example-header-image {
         background-image: url('../../assets/images/scammer.png');
@@ -145,5 +143,7 @@
       }
 
      mat-card{
+        max-width: 400px;
         margin: 10px 10px 10px 10px ;
+        overflow: hidden;
      }

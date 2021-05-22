@@ -1,149 +1,48 @@
-import { FormGroup, AbstractControl, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
-// import { routerTransition } from '../router.animation';
-// import { AuthService } from '../@core/services/auth.service';
-// import { SharedGlobalService } from '../@core/services/shared.global.service';
-import { NbDialogService } from '@nebular/theme';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import {  NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { ConnectionService } from '../@core/services/connection.service';
-import { AuthService } from '../services/auth.service';
-// import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
-// import { AddUserComponent } from '../modals/add-user/add-user.component';
-// import { UpdateUserComponent } from '../modals/update-user/update-user.component';
-import { NbPopoverDirective } from '@nebular/theme';
-import { SearchComponent } from '../shared/search/search.component';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-viewscammer',
   templateUrl: './viewscammer.component.html',
   styleUrls: ['./viewscammer.component.scss']
-  // animations: [routerTransition()]
 })
 export class ViewscammerComponent implements OnInit {
-    searchInformation : String
-  username: String;
-  password: String;
-  msg: String;
+  searchInformation : String
   loader = false;
-  disableSubmit;
   titleInfo : String = ''
-  conn;
-  userID;
-//   loading :Boolean = true;
   data = [];
-//   scammer = [];
   scammers = [];
-
   isScammer : Boolean = false
-  public config: ToasterConfig =
-  new ToasterConfig({
-    showCloseButton: true,
-    tapToDismiss: false,
-    timeout: 2000
-  });
-
   printerButton: boolean = false;
-
-
   filterQuery = '';
   sortBy = 'id';
   sortOrder = 'desc';
   selectQueryString = 'ID';
   selectQuery = 'id';
-
-  messageClass;
-  message;
-  processing = false;
-  form: FormGroup;
-
   printingData: any;
-
-
-
+  private index: number = 0;
   constructor(
-    // public sgs: SharedGlobalService,
-    // public authService: AuthService,
-    private dialogService: NbDialogService,
     public cs: ConnectionService,
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
     private router: Router,
-    private toastr: ToasterService,
-    public ngbModal: NgbModal,
+    public toaster : NbToastrService,
     private searchService : SearchService
 
-  ) {
-    // sgs.setBrowserTitle.emit('Login');
-    this.createForm();
-  }
-
-  ngOnInit() {
-
-  }
+  ) {}
+  ngOnInit() {}
 
   login(){
     this.router.navigate(['/login']);
-
   }
-
-
-  createForm() {
-    this.form = this.formBuilder.group({
-      username: ['', Validators.required], // Username field
-      password: ['', Validators.required] // Password field
-    });
-  }
-
-  enableForm() {
-    this.form.controls['username'].enable(); // Enable username field
-    this.form.controls['password'].enable(); // Enable password field
-  }
-
-  disableForm() {
-    this.form.controls['username'].disable(); // Disable username field
-    this.form.controls['password'].disable(); // Disable password field
-  }
-
-//   search(){
-//     const activeModal = this.ngbModal.open(SearchComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', 'backdrop': 'static' });
-//     activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
-//         //this.types.push(receivedEntry);
-//       console.log(receivedEntry);
-
-//       if(receivedEntry){
-//         this.scammer.push(receivedEntry);
-//         this.toastr.pop('warning', 'Alert', 'Scammer Match');
-//       }else{
-//         this.scammer = [];
-//         this.toastr.pop('success', 'No Data Returned', 'No scammer Found');
-//       }
-
-
-
-//       // this.getAllTypes();
-//       });
-//   }
-  // Functiont to submit form and login user
-
-
-
-  showBootstrapModal() {
-
-  }
-
-
 
   print(data){
-
     this.printingData = data;
-
     if(this.printingData){
       this.printerButton = true;
     }
-
     setTimeout(() => {
       let printContents, popupWin;
       printContents = document.getElementById('receipt').innerHTML;
@@ -202,23 +101,23 @@ export class ViewscammerComponent implements OnInit {
     popupWin.document.close();
   }, 500);
 }
-
+public click = 0
 searchInfo(){
+    this.click +=1
     this.titleInfo = this.searchInformation
-   if(this.searchInformation === ''){
-    this.scammers = []
-   }else {
-    this.searchService.searchInformation({searchData : this.searchInformation}).subscribe((res : any ) => {
-        if(res.success && res.data.length){
-            this.scammers = res.data
-        }
-        else {
-        this.scammers = []
-        }
-        this.isScammer = true
-    })
-   }
+    if(this.click > 5){
+        this.toaster.show('Please wait for 5 sec!', 'Warning!', { status : 'warning' });
+        setTimeout(() => {this.click = 0},5000)
+    }else {
+        this.searchService.searchInformation({searchData : this.searchInformation}).subscribe((res : any ) => {
+            if(res.success && res.data.length){
+                this.scammers = res.data
+            }
+            else {
+            this.scammers = []
+            }
+            this.isScammer = true
+        })
+    }
 }
-
-
 }

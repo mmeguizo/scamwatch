@@ -19,20 +19,20 @@
       </div>
     </nb-layout-header>
     <nb-layout-column>
-      <div class="row">
+      <div class="row" [style.margin-top]="'90px'">
           <div class="col-md-4"></div>
         <div class="col-sm-4">
-            <mat-card class="example-card" *ngIf="isScammer && scammers.length" >
+            <mat-card *ngIf="isScammer && scammers.length" >
                 <mat-card-header>
                   <div mat-card-avatar class="example-header-image"></div>
-                  <mat-card-title>Search word : {{titleInfo}}</mat-card-title>
+                  <mat-card-title >Search word : {{titleInfo}}</mat-card-title>
                   <mat-card-subtitle *ngIf="scammers.length">Number of results: {{scammers.length}}</mat-card-subtitle>
                 </mat-card-header>
                 <img mat-card-image src="../../assets/images/download.png" alt="Photo of a Shiba Inu">
-                <mat-card-actions>
+                <mat-card-actions [style.display]="'flex'" [style.justify-content] ="'space-between'">
                         <button mat-button>REPORT</button>
                         <button mat-button>SHARE</button>
-                        <button mat-button [style.float]="'right'" (click)="isScammer = false">CLOSE</button>
+                        <button mat-button  (click)="isScammer = false">CLOSE</button>
                 </mat-card-actions>
               </mat-card>
               <mat-card class="example-card" *ngIf="isScammer && !scammers.length " >
@@ -41,7 +41,7 @@
                   <mat-card-title>Search word : {{titleInfo}}</mat-card-title>
                   <mat-card-subtitle >No results found!</mat-card-subtitle>
                 </mat-card-header>
-                <img mat-card-image src="../../assets/images/download.png" alt="Photo of a Shiba Inu">
+                <img mat-card-image src="../../assets/images/download.gif" alt="Photo of a Shiba Inu">
                 <mat-card-actions [style.display]="'flex'" [style.justify-content] ="'flex-end'">
                         <button mat-button  (click)="isScammer = false">CLOSE</button>
                 </mat-card-actions>
