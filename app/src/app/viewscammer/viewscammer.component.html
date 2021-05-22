@@ -1,0 +1,53 @@
+<nb-layout windowMode>
+    <nb-layout-header class="centerme" fixed>
+     Scam Watch PH
+     <div>
+      <a class="logo" href="#" > <img style="width:7%;margin-left: 10px;" src="../../assets//images/scam.png"
+        class="chmsc-logo">
+      </a>
+     </div>
+     <div class="container" [style.align-items]="'center'">
+        <input type="text" placeholder="Search..." (keyup.enter)="searchInfo()" [(ngModel)]="searchInformation">
+        <div class="search"></div>
+      </div>
+      <div [style.align-items]="'right'">
+        <nb-actions size="medium" style="float: right; font-size: 10px;">
+            <nb-action class="fas fa-sign-in-alt pointer" nbPopover="Login" nbPopoverTrigger="hint"
+            nbPopoverPlacement="bottom" (click)="login()"> &nbsp; Account Login</nb-action>
+            <nb-action icon="printer-outline"  [disabled]="printerButton" nbPopover="Print" nbPopoverTrigger="hint" nbPopoverPlacement="bottom" (click)="print(mf.data)"></nb-action>
+          </nb-actions>
+      </div>
+    </nb-layout-header>
+    <nb-layout-column>
+      <div class="row">
+          <div class="col-md-4"></div>
+        <div class="col-sm-4">
+            <mat-card class="example-card" *ngIf="isScammer && scammers.length" >
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Search word : {{titleInfo}}</mat-card-title>
+                  <mat-card-subtitle *ngIf="scammers.length">Number of results: {{scammers.length}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="../../assets/images/download.png" alt="Photo of a Shiba Inu">
+                <mat-card-actions>
+                        <button mat-button>REPORT</button>
+                        <button mat-button>SHARE</button>
+                        <button mat-button [style.float]="'right'" (click)="isScammer = false">CLOSE</button>
+                </mat-card-actions>
+              </mat-card>
+              <mat-card class="example-card" *ngIf="isScammer && !scammers.length " >
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Search word : {{titleInfo}}</mat-card-title>
+                  <mat-card-subtitle >No results found!</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="../../assets/images/download.png" alt="Photo of a Shiba Inu">
+                <mat-card-actions [style.display]="'flex'" [style.justify-content] ="'flex-end'">
+                        <button mat-button  (click)="isScammer = false">CLOSE</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </nb-layout-column>
+  </nb-layout>
