@@ -1,0 +1,116 @@
+  <nb-layout windowMode>
+    <nb-layout-header class="centerme" fixed>
+     Scam Watch PH
+     <div>
+      <a class="logo" href="#" > <img style="width:7%;margin-left: 10px;" src="../../assets//images/scam.png"
+        class="chmsc-logo">
+      </a>
+     </div>
+    </nb-layout-header>
+    <nb-layout-column>
+      <div class="row">
+        <toaster-container [toasterconfig]="config">
+        </toaster-container>
+        <div class="col-sm-12">
+          <nb-card>
+            <nb-card-header class="">
+              <div class="action-groups-header" style="float: left; clear: both">
+                Search Online
+              </div>
+              <nb-actions size="medium" style="float: right; font-size: 10px;">
+
+                <nb-action class="fas fa-search pointer" nbPopover="Click to Search" nbPopoverTrigger="hint"
+                nbPopoverPlacement="bottom" (click)="search()"> &nbsp; Search Online</nb-action>
+
+                <nb-action class="fas fa-sign-in-alt pointer" nbPopover="Login" nbPopoverTrigger="hint"
+                nbPopoverPlacement="bottom" (click)="login()"> &nbsp; Account Login</nb-action>
+                <nb-action icon="printer-outline"  [disabled]="printerButton" nbPopover="Print" nbPopoverTrigger="hint" nbPopoverPlacement="bottom" (click)="print(mf.data)"></nb-action>
+                <!-- <nb-action icon="file-text-outline" nbPopover="Export to excel" nbPopoverTrigger="hint" nbPopoverPlacement="bottom" (click)="generateCsv(mf.data)"></nb-action> -->
+              </nb-actions>
+            </nb-card-header>
+
+
+                        <nb-card-body>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="clear"></div>
+            <table class="table" [mfData]="scammer | dataFilter : filterQuery: selectQuery" #mf="mfDataTable"
+              [mfRowsOnPage]="10" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="mf.data?.length < 1">
+                  <td colspan="4" class="acenter error">No Scammer found</td>
+
+              </tr>
+                <tr *ngFor="let scammer of mf.data; let i = index">
+                  <td scope="col">{{ i + 1 }}</td>
+                  <td scope="col">{{ scammer?.name | titlecase }}</td>
+                  <td scope="col">{{ scammer?.email}}</td>
+                  <td scope="col">{{ scammer?.number}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="10">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[10,20,50,100]"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </nb-layout-column>
+  </nb-layout>
+
+
+
+
+
+  <div style="display: none;" id="receipt">
+    <div class="receipt">
+      <div class="row">
+        <div class="col-sm-12 acenter">
+            Scammer Watch <br />
+
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Number</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="printingData?.length < 1">
+            <td colspan="4" class="acenter error">No Scammer found</td>
+        </tr>
+          <tr *ngFor="let scammer of printingData; let i = index">
+            <td scope="col">{{ i + 1 }}</td>
+            <td scope="col">{{ scammer?.name | titlecase }}</td>
+            <td scope="col">{{ scammer?.email}}</td>
+            <td scope="col">{{ scammer?.number}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-sm-12">
+    <nb-card>
+      <nb-card-header>
+        ADMIN DASHBOARD
+        <div class="clock">
+          <span class="date">{{ date | date: 'EEE. MMM. d, yyyy' }} |</span> &nbsp;🕐&nbsp;
+          <span class="hour">{{ hours }}:</span>
+          <span class="min">{{ minutes }}:</span>
+          <span class="second">{{ seconds }}</span>
+          &nbsp;
+          <span> {{ PmAm >= 12 && PmAm <= 24 ? 'PM' : 'AM' }} </span>
+        </div>
+      </nb-card-header>
+    </nb-card>
+  </div>
+</div>
+<br />
+<div class="row">
+  <div class="col-md-5 card">
+    <div class="stats-container pointer" (click)="user()">
+      <div class="stats">
+        <i class="icon ion-person-stalker"></i>
+      </div>
+      <div class="description">
+        <div translate> {{userLength.length}}</div>
+        <div class="description-stats">Users</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-5 card">
+    <div class="stats-container pointer" (click)="information()">
+      <div class="stats">
+        <i class="icon ion-android-globe"></i>
+      </div>
+      <div class="description">
+        <div translate> {{informationLength.length}}</div>
+        <div class="description-stats">Reported Informations</div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-md-1"></div>
+  <div class="col-md-2 card">
+    <div class="stats-container">
+      <div class="stats">
+        <i class="icon ion-person-stalker"></i>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-2 card">
+    <div class="stats-container">
+      <div class="stats">
+        <i class="icon ion-person-stalker"></i>
+      </div>
+
+    </div>
+  </div> -->
+</div>
