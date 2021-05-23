@@ -190,6 +190,22 @@ module.exports = (router) => {
     });
 
 
+    router.get('/findUser/:information', (req, res) => {
+
+        let data = req.params.information
+
+        Information.find({information : data
+         
+      },(err, document) => {
+      if(err) return res.json({success : false, message : err.message})
+      if(document.length){return res.json({success : true, data : document})}
+      else{return res.json({success : false, data : document})}
+      })
+
+
+    });
+
+
 
 
     router.put('/updateInformation', (req, res) => {

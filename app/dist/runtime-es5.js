@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app-admin-admin-module-ngfactory":"app-admin-admin-module-ngfactory","default~app-login-login-module-ngfactory~app-viewscammer-viewscammer-module-ngfactory":"default~app-login-login-module-ngfactory~app-viewscammer-viewscammer-module-ngfactory","app-login-login-module-ngfactory":"app-login-login-module-ngfactory","app-viewscammer-viewscammer-module-ngfactory":"app-viewscammer-viewscammer-module-ngfactory"}[chunkId]||chunkId) +    "-es5.js"
+/******/ 		return __webpack_require__.p + "" + ({"app-admin-admin-module-ngfactory":"app-admin-admin-module-ngfactory","app-login-login-module-ngfactory":"app-login-login-module-ngfactory","app-viewscammer-viewscammer-module-ngfactory":"app-viewscammer-viewscammer-module-ngfactory"}[chunkId]||chunkId) +    "-es5.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

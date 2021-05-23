@@ -4,8 +4,34 @@ const Id = require('../models/id')
 // const globalconnetion = require('../serverconnetion/connections');
 
 module.exports = (router) => {
+    router.post('/addScammerInfo', (req,res) => {
+        const {name, email , number} =  req.body
+        console.log(name);
+        console.log(email);
+        console.log(number);
 
+        const scammer = new Search({
+            name : name,
+            email : email,
+            number : number
+        })
+        Search.addScammerInfo(scammer, (err, scammer )=> {
+            if(err) throw err
+            if(scammer){
+                res.json({success :true, data : scammer, message : 'Save successfully'})
+            }else {
+                res.json({success :false, data : scammer ,message : 'Failed to save scammer'})
+            }
+        })
+    })
 
+    router.post('/findUser', (req, res) => {
+        const {searchData} = req.body
+        Search.findScammer(searchData, response => {
+            res.json(response)
+        })
+    });
+// =========================================================
     router.get('/getAllCategory', (req, res) => {
 
         // Search database for all blog posts

@@ -9,6 +9,7 @@ import { ConnectionService } from '../@core/services/connection.service';
 export class InfoService {
 
   options;
+  options1;
   //public domain = "http://localhost:3000";
   public domain
   constructor(
@@ -28,6 +29,11 @@ export class InfoService {
     this.options = new HttpHeaders({
       'Content-Type': 'application/json', // Format set to JSON
       'authorization': this.authService.authToken // Attach token
+    });
+    this.options1 = new HttpHeaders({
+      'Content-Type': 'application/json', // Format set to JSON
+      //remove token not authenticated routes create customer header later
+      //'authorization': this.authService.authToken // Attach token
     });
   }
 
@@ -59,6 +65,13 @@ export class InfoService {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.put(this.domain + '/info/deleteInformation', data, { headers: this.options });
   }
+
+
+  searchInformation(info) {
+    return this.http.get(this.domain + '/info/findUser/' + info,);
+   // return this.http.post(this.domain + '/info/findUser' , info, { headers:this.options1 });
+  }
+
 
 
 }

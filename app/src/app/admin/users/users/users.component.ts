@@ -69,7 +69,6 @@ export class UsersComponent implements OnInit {
 
 
   getAllUsers() {
-
     // Function to GET all blogs from database
     this.user_service.getAllUser().subscribe((data: any) => {
 
@@ -86,7 +85,6 @@ export class UsersComponent implements OnInit {
 
 
   }
-
 
 
   updateUser(user) {

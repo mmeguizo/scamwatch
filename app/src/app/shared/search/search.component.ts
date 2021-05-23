@@ -66,20 +66,20 @@ export class SearchComponent implements OnInit {
 
 
 
-    this.searches.findUser( datas ).subscribe((data: any) => {
+    // this.searches.findUser( datas ).subscribe((data: any) => {
 
-      console.log({findUser:data});
-      this.passEntry.emit(data.scammer)
-      this.closeModal();
-      // if (data.success) {
-      //   this.scammer = data.scammer
-      //   this.loading = false;
-      // } else {
-      //   this.scammer = [];
-      //   this.loading = false;
-      // }
+    //   console.log({findUser:data});
+    //   this.passEntry.emit(data.scammer)
+    //   this.closeModal();
+    //   // if (data.success) {
+    //   //   this.scammer = data.scammer
+    //   //   this.loading = false;
+    //   // } else {
+    //   //   this.scammer = [];
+    //   //   this.loading = false;
+    //   // }
 
-    });
+    // });
 
 
     // this.sgs.request('post', 'type/addType', {form: this.form.value}, async (res) => {

@@ -40,26 +40,36 @@ export class SearchService {
   }
 
 
-  findUser(data) {
+//   findUser(data) {
 
-    //if not authenticated route remove headers
-   //this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/search/findUser/' +  data.selector + '/' + data.input );
-    // return this.http.get(this.domain + '/search/findUser', { params : data} );
+//     //if not authenticated route remove headers
+//    //this.createAuthenticationHeaders(); // Create headers
+//     return this.http.get(this.domain + '/search/findUser/' +  data.selector + '/' + data.input );
+//     // return this.http.get(this.domain + '/search/findUser', { params : data} );
 
-    /*
+//     /*
 
-      GET /search?option=some%20data&keyword=some%20data
-Then in your server, you could use:
+//       GET /search?option=some%20data&keyword=some%20data
+// Then in your server, you could use:
 
-req.query.option
-req.query.keyword
+// req.query.option
+// req.query.keyword
 
-    */
+//     */
 
 
+
+//   }
+  searchInformation(info) {
+
+    // return this.http.post('http://localhost:3000/search/findUser' , info, { headers:this.options });
+    return this.http.post(this.domain + '/search/findUser', info, { headers: this.options });
 
   }
+
+
+
+
 
 
   addUser(data) {
